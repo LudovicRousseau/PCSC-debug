@@ -87,9 +87,11 @@ static pthread_once_t SocketName_init_control = PTHREAD_ONCE_INIT;
 static void SocketName_init(void)
 {
 	/* socket name not yet initialized */
-	char *socketNameEnv;
+	const char *socketNameEnv;
 
-	socketNameEnv = getenv("PCSCLITE_CSOCK_NAME");
+	Log0(PCSC_LOG_CRITICAL);
+	socketNameEnv = SYS_GetEnv("PCSCLITE_CSOCK_NAME");
+	Log2(PCSC_LOG_CRITICAL, "socketNameEnv %s", socketNameEnv);
 	if (socketNameEnv)
 		strncpy(SocketName, socketNameEnv, sizeof SocketName);
 	else
