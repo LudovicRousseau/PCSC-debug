@@ -44,6 +44,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <sys/time.h>
 #include <pthread.h>
 
+#include "config.h"
 #include "misc.h"
 #include <winscard.h>
 #include "sys_generic.h"
@@ -160,7 +161,7 @@ static void log_line(const char *fmt, ...)
 
 static LONG load_lib(void)
 {
-#define LIBPCSC "libpcsclite_real.so.1"
+#define LIBPCSC LIBDIR "/libpcsclite_real.so.1"
 
 	const char *lib;
 

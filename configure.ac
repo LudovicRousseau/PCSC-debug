@@ -306,6 +306,14 @@ AS_IF([test x$use_embedded = xyes],
 	[AC_DEFINE(NO_LOG, 1, [Disable logging support])
 	 PCSCLITE_FEATURES="${PCSCLITE_FEATURES} nolog"])
 
+# define LIBDIR
+AS_IF([test "x$libdir" != xNONE],
+	[LIBDIR="$libdir"],
+	[LIBDIR="$ac_default_libdir"])
+AX_RECURSIVE_EVAL($LIBDIR,LIBDIR_exp)
+LIBDIR=$LIBDIR_exp
+AC_DEFINE_UNQUOTED(LIBDIR, "$LIBDIR", [library directory])
+
 # --enable-usbdropdir=DIR
 AC_ARG_ENABLE(usbdropdir,
   AS_HELP_STRING([--enable-usbdropdir=DIR], [directory containing USB
@@ -408,6 +416,7 @@ PCSC_ARCH:           ${PCSC_ARCH}
 
 polkit support:         ${use_polkit}
 polkit policy dir:      ${polkit_policy_dir}
+libdir:                 ${LIBDIR}
 libudev support:        ${use_libudev}
 libusb support:         ${use_libusb}
 USB drop directory:     ${usbdropdir}
